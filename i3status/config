@@ -2,19 +2,19 @@ general {
         output_format = "i3bar"
         colors = false
         markup = pango
-        interval = 5
+        interval = 1
         color_good = '#2f343f'
 	color_degraded = '#ebcb8b'
 	color_bad = '#ba5e57'
 }
-#order += "read_file btc"
+
 order += "memory"
 #order += "load"
 #order += "cpu_temperature 0"
 order += "disk /"
 #order += "disk /home"
 #order += "ethernet ens18"
-order += "wireless wlp1s0"
+order += "wireless wlp2s0b1"
 order += "volume master"
 order += "battery 1"
 order += "tztime date"
@@ -42,7 +42,7 @@ ethernet ens18 {
         format_down = "<span background='#88c0d0'> Disconnected </span>"
 }
 
-wireless wlp1s0 {
+wireless wlp2s0b1 {
         format_up = "<span background='#619bff'>  %essid </span>"
         format_down = "<span background='#619bff'>  Disconnected </span>"
 }
@@ -58,35 +58,29 @@ volume master {
 battery 1 {
 	last_full_capacity = true
         integer_battery_capacity = true
-	format = "<span background='#66e5f7'> %status %percentage </span>"
+	format = "<span background='#66e5f7'> %status %percentage %remaining </span>"
         format_down = " No Battery"
         status_chr = " Charging"
         status_bat = ""
         status_unk = " Unknown"
         status_full = " Charged"
-        path = "/sys/class/power_supply/BATC/uevent"
+        path = "/sys/class/power_supply/BAT0/uevent"
         low_threshold = 10
 }
 
 tztime date {
-	format = "<span background='#b8ffee'> %time </span>"
-	format_time = " %a %-d %b"
+	format = "<span background='#b8ffee'>  %d.%m.%y </span>"
+	timezone = "Europe/Berlin"
 }
 
 tztime hour {
-	format = "<span background='#ffffff'> %time </span>"
-	format_time = "%H:%M"
+	format = "<span background='#ffffff'>  %I:%M:%S </span>"
+	timezone = "Europe/Berlin"
 }
 
 memory {
 	format = "<span background='#ffffff'>  %used Used </span>"
         threshold_degraded = "10%"
         format_degraded = "MEMORY: %free"
-}
-
-read_file btc {
-        format = "<span background='#ffffff'> %content </span>"
-	format_bad = "err"
-	path= "/home/zimsneexh/price.txt"
 }
 #88c0d0 main color
