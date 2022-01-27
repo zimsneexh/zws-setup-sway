@@ -1,0 +1,205 @@
+# zimsneexh's sway config
+# zimsneexh, 2021
+
+#######################################################################################
+#
+# VARIABLES
+#
+
+# Define windows key as mod key
+set $mod Mod4
+
+# set h, j, k, l for movement (vim like)
+set $left h
+set $down j
+set $up k
+set $right l
+
+# set terminal emulator to alacritty
+set $term alacritty
+
+#set app-launcher
+set $menu rofi -show drun -theme theme
+
+# Base colors
+set $base00 #1d2021
+# unfocused grey
+set $base01 #434343
+set $base02 #504945
+set $base03 #665c54
+set $base04 #bdae93
+set $base05 #d5c4a1
+set $base06 #ebdbb2
+set $base07 #fbf1c7
+set $base08 #fb4934
+set $base09 #fe8019
+set $base0A #fabd2f
+set $base0B #b8bb26
+set $base0D #83a598
+set $base0E #d3869b
+# main color
+set $base0F #88c0d0
+
+# gaps and borders colors
+# Property Name          Border  BG      Text    Indicator Child
+client.focused           $base0F $base0D $base00 $base0F   $base0F
+client.unfocused         $base01 $base00 $base05 $base01   $base01
+
+#######################################################################################
+
+#######################################################################################
+#
+# INIT
+#
+
+#font
+font pango:JetBrains Mono 10
+
+#titlebar
+default_border pixel
+
+#gaps
+gaps inner 4
+gaps outer 1
+
+# set same wallpaper to all displays in fill mode
+output * bg ~/.wallpaper/wallpaper.jpg fill
+
+exec gsettings set org.gnome.desktop.interface gtk-theme 'Nordic'
+exec gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+#######################################################################################
+
+
+#######################################################################################
+#
+# KEYBINDS
+#
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# kill running app
+bindsym $mod+x kill
+
+#reload sway config
+bindsym $mod+Shift+r reload
+
+#terminal
+bindsym $mod+Return exec $term
+bindsym $mod+t exec $term
+
+#rofi
+bindsym $mod+d exec $menu
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# switch container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle fullscreen
+bindsym $mod+f fullscreen
+
+# move focus to parent
+bindsym $mod+a focus parent
+
+# toggle floating mode
+bindsym $mod+Shift+space floating toggle
+
+# floating modifier key
+floating_modifier $mod
+
+#######################################################################################
+
+#######################################################################################
+#
+# RESIZE MODE
+#
+mode "resize" {
+    	bindsym $left resize shrink width 10px
+    	bindsym $down resize grow height 10px
+    	bindsym $up resize shrink height 10px
+    	bindsym $right resize grow width 10px
+
+	# Ditto, with arrow keys
+	bindsym Left resize shrink width 10px
+	bindsym Down resize grow height 10px
+   	bindsym Up resize shrink height 10px
+    	bindsym Right resize grow width 10px
+
+    	# Return to default mode
+    	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+#######################################################################################
+
+#######################################################################################
+#
+# SWAY-BAR-CONFIG
+#
+bar {
+    position top
+    status_command i3status
+
+    colors {
+    	background #2f343f
+        statusline #2f343f
+        separator #4b5262
+
+        # colour of border, background, and text
+        focused_workspace       #2f343f #88c0d0 #2f343f
+        active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #2f343f #2f343f #d8dee8
+        urgent_workspace       #2f343f #ebcb8b #2f343f
+    }
+}
+#######################################################################################
