@@ -10,13 +10,11 @@ colors:
     text: '#2e3440'
     cursor: '#d8dee9'
   selection:
-    #text: CellForeground
     background: '#4c566a'
   search:
     matches:
-      #foreground: CellBackground
       background: '#88c0d0'
-    bar:
+    colors.footer_bar:
       background: '#434c5e'
       foreground: '#d8dee9'
   normal:
@@ -50,15 +48,10 @@ colors:
 font:
   size: 9
   normal:
-    # size: 15
     family: JetBrains Mono
-    # Style can be specified to pick a specific face.
-    # style: Italic
 
 window:
   dimensions:
-    # columns: 73
-    # lines: 18
     columns: 80
     lines: 17
 
@@ -66,8 +59,5 @@ window:
     x: 10
     y: 10
 
-  #position:
-   # x: 0
-    #y: 0
 shell:
-  program: /usr/bin/zsh-5.8
+  program: /usr/bin/zsh
